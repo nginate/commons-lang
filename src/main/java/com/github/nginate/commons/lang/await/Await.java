@@ -1,4 +1,4 @@
-package com.github.commons.lang.await;
+package com.github.nginate.commons.lang.await;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;

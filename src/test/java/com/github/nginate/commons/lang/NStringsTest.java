@@ -1,9 +1,9 @@
-package com.github.commons.lang;
+package com.github.nginate.commons.lang;
 
 import org.junit.Test;
 
-import static com.github.commons.lang.NStrings.format;
-import static com.github.commons.lang.NStrings.formatNamed;
+import static com.github.nginate.commons.lang.NStrings.format;
+import static com.github.nginate.commons.lang.NStrings.formatNamed;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NStringsTest {

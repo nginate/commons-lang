@@ -1,4 +1,4 @@
-package com.github.commons.lang;
+package com.github.nginate.commons.lang;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
