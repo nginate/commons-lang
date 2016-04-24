@@ -9,11 +9,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
+
+import static java.util.function.Function.identity;
 
 @SuppressWarnings("WeakerAccess")
 @UtilityClass
@@ -50,6 +49,11 @@ public class NCollections {
     @Nonnull
     public static <T> T requireSingle(@NonNull Collection<T> collection) {
         return getSingleOptional(collection).get();
+    }
+
+    @Nullable
+    public static <T> T[] mapToArray(@Nullable Collection<T> original, @NonNull IntFunction<T[]> generator) {
+        return mapToArray(original, generator, identity());
     }
 
     @Nullable
@@ -91,8 +95,21 @@ public class NCollections {
     }
 
     @Nullable
-    public static <K, V, T> List<T> mapToList(@Nullable Map<K, V> original, @NonNull Function<Map.Entry<K, V>, T>
-            mapper) {
-        return original != null ? original.entrySet().stream().map(mapper).collect(Collectors.toList()) : null;
+    public static <K, V, T> List<T> mapToList(@Nullable Map<K, V> original,
+            @NonNull BiFunction<K, V, T> mapper) {
+        if (original == null) {
+            return null;
+        }
+        return mapToList(original.entrySet(), entry -> mapper.apply(entry.getKey(), entry.getValue()));
+    }
+
+    @Nullable
+    public static <K, V, T> T[] mapToArray(@Nullable Map<K, V> original,
+            @NonNull IntFunction<T[]> generator,
+            @NonNull BiFunction<K, V, T> mapper) {
+        if (original == null) {
+            return null;
+        }
+        return mapToArray(original.entrySet(), generator, entry -> mapper.apply(entry.getKey(), entry.getValue()));
     }
 }
