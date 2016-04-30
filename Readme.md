@@ -7,6 +7,7 @@ existing libraries. So this is a repo to rule them all.
 **What's there in this bundle?**
 
 * String utility
+
 Adds an ability to use string templates, similar to those, used in slf4j
 
 ```java
@@ -22,6 +23,7 @@ Adds an ability to use string templates, similar to those, used in slf4j
 ```
 
 * Collections utility
+
 Functional stuff from java 8 to simplify boilerplate around collections
 
 ```java
@@ -40,6 +42,7 @@ Functional stuff from java 8 to simplify boilerplate around collections
 ```
 
 * Unchecked
+
 Default stream API can't handle checked exceptions in functional call, 
 because those interfaces do not throw checked exceptions. This one 
 allows you to say hello to functional programming with old-fashioned 
@@ -73,4 +76,17 @@ But with unchecked functional interfaces you can simplify the code above:
     
     ...
     wrap(() -> throw new Exception(""));        
+```
+
+* Await
+
+Sometimes it's worth to just sit and wait for the body of your enemy to
+float by.
+```java
+    // wait for 30 sec
+    Await.waitUntil(30000, () -> isEnemyBodyFloatingBy());
+    // wait for 30 sec and check each sec
+    Await.waitUntil(30000, 1000, () -> isEnemyBodyFloatingBy());
+    // wait and notify tyourself with a message
+    Await.waitUntil(30000, 1000, "all your base are belong to us", () -> isEnemyBodyFloatingBy());
 ```
