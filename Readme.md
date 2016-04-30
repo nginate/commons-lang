@@ -1,4 +1,5 @@
 **Overview**
+
 Working on different projects we have created a bunch of useful 
 utilities/helper classes/wrappers and of course duplicates of some 
 existing libraries. So this is a repo to rule them all.
@@ -36,4 +37,40 @@ Functional stuff from java 8 to simplify boilerplate around collections
     //filter elements
     Set<String> strings = ...
     Set<String> nonEmptyStrings = NCollections.filter(strings, s -> !"".equals(s));
+```
+
+* Unchecked
+Default stream API can't handle checked exceptions in functional call, 
+because those interfaces do not throw checked exceptions. This one 
+allows you to say hello to functional programming with old-fashioned 
+checked exceptions
+
+```java
+    //vanilla style
+    public void wrap(Runnable callback) {
+        // do nasty things
+        callback.run();
+        // do nasty things again
+    }
+    
+    ...
+    wrap(() -> {
+        try {
+            // do something that throws exception
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    });
+```
+
+But with unchecked functional interfaces you can simplify the code above:
+```java
+    public void wrap(URunnable callback) {
+            // do nasty things
+            callback.run();
+            // do nasty things again
+    }
+    
+    ...
+    wrap(() -> throw new Exception(""));        
 ```
