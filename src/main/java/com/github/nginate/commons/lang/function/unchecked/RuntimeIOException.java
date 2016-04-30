@@ -1,5 +1,14 @@
 package com.github.nginate.commons.lang.function.unchecked;
 
+/**
+ * Sometimes it's still necessary to indicate specific problems as if you've previously done with checked exceptions,
+ *  but now you do not want. Maybe because of functional flow, or etc. This exception mimics IO exception in runtime
+ *  world.
+ *
+ *  @see java.io.IOException
+ *
+ *  @since 1.0
+ */
 public class RuntimeIOException extends RuntimeException {
     public RuntimeIOException() {
     }
