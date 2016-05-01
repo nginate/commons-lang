@@ -94,3 +94,21 @@ float by.
     // wait and notify tyourself with a message
     Await.waitUntil(30000, 1000, "all your base are belong to us", () -> isEnemyBodyFloatingBy());
 ```
+
+* Memoizers
+
+Some heavy operations may be wrapped with implicit cache functions
+```java
+    //Before
+    list.stream().forEach(element -> {
+        Object result = heavyFunction.apply(element); // will perform computing even for duplicate elements
+        System.out.println("Result :" + result);
+    });
+    
+    //After
+    Function<T, U> optimizedFunction = new FunctionMemoizer<>().doMemoize(heavyFunction);
+    list.stream().forEach(element -> {
+        Object result = heavyFunction.apply(element); // duplicate results are cached
+        System.out.println("Result :" + result);
+    });
+```
