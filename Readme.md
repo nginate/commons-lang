@@ -4,6 +4,8 @@ Working on different projects we have created a bunch of useful
 utilities/helper classes/wrappers and of course duplicates of some 
 existing libraries. So this is a repo to rule them all.
 
+**Build status**
+
 **What's there in this bundle?**
 
 * String utility
