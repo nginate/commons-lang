@@ -14,6 +14,7 @@ public class NStringsTest {
         assertThat(format("{} abc asd", "test")).isEqualTo("test abc asd");
         assertThat(format("abc asd {}", "test")).isEqualTo("abc asd test");
         assertThat(format("abc asd {} { {}", "test", "test2")).isEqualTo("abc asd test { test2");
+        assertThat(format("abc {", "test")).isEqualTo("abc {");
     }
 
     @Test
@@ -22,5 +23,6 @@ public class NStringsTest {
         assertThat(formatNamed("{asd} abc asd", "test")).isEqualTo("test abc asd");
         assertThat(formatNamed("abc asd {asd}", "test")).isEqualTo("abc asd test");
         assertThat(formatNamed("abc asd {asd} { {qwe}", "test", "test2")).isEqualTo("abc asd test test2");
+        assertThat(formatNamed("abc { asd {{{{ asd", "test")).isEqualTo("abc { asd {{{{ asd");
     }
 }

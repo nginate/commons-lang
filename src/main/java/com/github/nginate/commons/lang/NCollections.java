@@ -195,7 +195,8 @@ public class NCollections {
      * @return collection copy with matched elements
      */
     @Nonnull
-    public static <T> List<T> filter(@Nonnull Collection<T> original, @Nonnull Predicate<T> predicate) {
+    public static <T> List<T> filter(@NonNull @Nonnull Collection<T> original,
+                                     @NonNull @Nonnull Predicate<T> predicate) {
         return original.stream().filter(predicate).collect(Collectors.toList());
     }
 
@@ -209,7 +210,7 @@ public class NCollections {
      * @see Stream#findAny()
      */
     @Nonnull
-    public static <T> Optional<T> findAny(@Nonnull Collection<T> original, @Nonnull Predicate<T> predicate) {
+    public static <T> Optional<T> findAny(@NonNull @Nonnull Collection<T> original, @Nonnull Predicate<T> predicate) {
         return original.stream().filter(predicate).findAny();
     }
 
