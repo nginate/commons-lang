@@ -12,7 +12,7 @@ public interface UConsumer<T> {
      * Performs this operation on the given argument.
      *
      * @param t the input argument
-     * @throws Exception
+     * @throws Exception any checked exception
      */
     void accept(T t) throws Exception;
 }

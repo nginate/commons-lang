@@ -44,7 +44,7 @@ public final class Await {
      * @param waitStepMillis step wait millis
      * @param condition      required condition
      * @throws ConditionTimeoutException if condition was not satisfied in configured period
-     * @throws IllegalArgumentException  if step millis >= overall wait millis
+     * @throws IllegalArgumentException  if step millis are more or equal to overall wait millis
      * @see Await#waitUntil(int, int, String, Callable)
      */
     public static void waitUntil(int timeout, int waitStepMillis, Callable<Boolean> condition) {
@@ -59,7 +59,7 @@ public final class Await {
      * @param failureMessage message to see if waiting fails
      * @param condition      required condition
      * @throws ConditionTimeoutException if condition was not satisfied in configured period
-     * @throws IllegalArgumentException  if step millis >= overall wait millis
+     * @throws IllegalArgumentException  if step millis are more or equal to overall wait millis
      * @see Await#waitUntil(int, int, String, Callable)
      */
     public static void waitUntil(int timeout, String failureMessage, Callable<Boolean> condition) {
@@ -75,7 +75,7 @@ public final class Await {
      * @param failureMessage message to see if waiting fails
      * @param condition      required condition
      * @throws ConditionTimeoutException if condition was not satisfied in configured period
-     * @throws IllegalArgumentException  if step millis >= overall wait millis
+     * @throws IllegalArgumentException  if step millis are more or equal to overall wait millis
      */
     public static void waitUntil(int timeout, int waitStepMillis, String failureMessage, Callable<Boolean> condition) {
         Preconditions.checkArgument(waitStepMillis <= timeout, "step sleep time must be less or equal to timeout");

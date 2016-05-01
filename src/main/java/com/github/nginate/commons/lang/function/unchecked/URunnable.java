@@ -10,7 +10,7 @@ package com.github.nginate.commons.lang.function.unchecked;
 public interface URunnable {
     /**
      * Simple runnable that is allowed to throw checked exception
-     * @throws Exception
+     * @throws Exception any checked exception
      */
     void run() throws Exception;
 }
