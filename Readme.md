@@ -6,6 +6,8 @@ existing libraries. So this is a repo to rule them all.
 
 **Build status**
 
+[![Build Status](https://travis-ci.org/nginate/commons-lang.svg?branch=master)](https://travis-ci.org/nginate/commons-lang)
+
 **What's there in this bundle?**
 
 * String utility
