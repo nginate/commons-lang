@@ -78,6 +78,7 @@ public final class Await {
      * @throws IllegalArgumentException  if step millis are more or equal to overall wait millis
      */
     public static void waitUntil(int timeout, int waitStepMillis, String failureMessage, Callable<Boolean> condition) {
+        Preconditions.checkArgument(waitStepMillis > 0, "step sleep time should be positive");
         Preconditions.checkArgument(waitStepMillis <= timeout, "step sleep time must be less or equal to timeout");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
