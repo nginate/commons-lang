@@ -1,15 +1,53 @@
-**Overview**
+### Overview
 
 Working on different projects we have created a bunch of useful 
 utilities/helper classes/wrappers and of course duplicates of some 
 existing libraries. So this is a repo to rule them all.
 
-**Build status**
+#### Build status
 
 [![Build Status](https://travis-ci.org/nginate/commons-lang.svg?branch=master)](https://travis-ci.org/nginate/commons-lang)
 [ ![Download](https://api.bintray.com/packages/nginate/maven/commons-lang/images/download.svg) ](https://bintray.com/nginate/maven/commons-lang/_latestVersion)
 
-**What's there in this bundle?**
+#### Distribution
+
+##### Maven
+```maven
+    <repositories>
+       <repository>
+          <id>jcenter</id>
+          <url>http://jcenter.bintray.com</url>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+          </snapshots>
+           <releases>
+             <enabled>true</enabled>
+             <checksumPolicy>warn</checksumPolicy>
+          </releases>
+       </repository>
+    </repositories>
+    
+    <dependency>
+        <groupId>com.github.nginate</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+```
+
+##### Gradle
+```gradle
+    repositories {
+        jcenter()
+    }
+    
+    dependencies {
+        compile 'com.github.nginate:commons-lang:1.0.0'
+    }
+```
+
+#### What's there in this bundle?
 
 * String utility
 
@@ -132,7 +170,7 @@ Some heavy operations may be wrapped with implicit cache functions
     });
 ```
 
-**License**
+#### License
 
 <a href="http://www.wtfpl.net/"><img
        src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
