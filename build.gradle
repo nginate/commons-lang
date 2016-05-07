@@ -71,10 +71,10 @@ bintray {
         licenses = ['WTFPL']
         vcsUrl = 'https://github.com/nginate/commons-lang.git'
         version {
-            name = version
-            desc = "${project.name} $version"
+            name = project.version
+            desc = "${project.name} $project.version"
             released = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
-            vcsTag = version
+            vcsTag = project.version
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
