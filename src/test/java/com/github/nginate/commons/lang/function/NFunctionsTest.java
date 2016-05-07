@@ -1,104 +1,81 @@
 package com.github.nginate.commons.lang.function;
 
 import com.github.nginate.commons.lang.function.unchecked.RuntimeIOException;
-import com.github.nginate.commons.lang.function.unchecked.UConsumer;
-import com.github.nginate.commons.lang.function.unchecked.URunnable;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.github.nginate.commons.lang.NStrings.format;
 import static com.github.nginate.commons.lang.function.NFunctions.memoize;
 import static com.github.nginate.commons.lang.function.NFunctions.unchecked;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Matchers.isA;
-import static org.mockito.Mockito.*;
 
 public class NFunctionsTest {
+
     @Test
     public void testMemoizeSupplier() throws Exception {
-        Supplier<String> simpleSupplier = () -> "";
-        Supplier<String> memoizedSupplier = memoize(simpleSupplier);
+        AtomicInteger counter = new AtomicInteger();
 
-        assertThat(memoizedSupplier)
-                .isNotNull()
-                .isNotEqualTo(simpleSupplier);
+        Supplier<Integer> memoizedSupplier = memoize(counter::incrementAndGet);
+
+        assertThat(memoizedSupplier.get()).isEqualTo(1);
+        // counter shouldn't be called second time
+        assertThat(memoizedSupplier.get()).isEqualTo(1);
     }
 
     @Test
     public void testMemoizeFunction() throws Exception {
-        Function<Integer, String> simpleFunction = Integer::toHexString;
-        Function<Integer, String> memoizedFunction = memoize(simpleFunction);
+        AtomicInteger counter = new AtomicInteger();
 
-        assertThat(memoizedFunction)
-                .isNotNull()
-                .isNotEqualTo(simpleFunction);
+        Function<String, String> memoizedFunction = memoize(key -> format("{}: {}", key, counter.incrementAndGet()));
+
+        assertThat(memoizedFunction.apply("key1")).isEqualTo("key1: 1");
+        // counter shouldn't be called second time for same input
+        assertThat(memoizedFunction.apply("key1")).isEqualTo("key1: 1");
+
+        // but should for different inputs
+        assertThat(memoizedFunction.apply("key2")).isEqualTo("key2: 2");
+        assertThat(memoizedFunction.apply("key3")).isEqualTo("key3: 3");
     }
 
     @Test
     public void testUncheckedRunnable() throws Exception {
-        URunnable uRunnable = () -> {};
-        Runnable runnable = unchecked(uRunnable);
+        Runnable runnable = unchecked(() -> {
+            throw new IOException();
+        });
 
-        assertThat(runnable)
-                .isNotNull()
-                .isNotEqualTo(uRunnable);
+        assertThatThrownBy(runnable::run).isExactlyInstanceOf(RuntimeException.class);
     }
 
     @Test
     public void testUncheckedRunnableWithMapper() throws Exception {
-        Class<? extends Exception> exceptionClass = IOException.class;
-        Class<? extends RuntimeException> mappedExceptionClass = RuntimeIOException.class;
+        Runnable runnable = unchecked(() -> {
+            throw new IOException();
+        }, RuntimeIOException::new);
 
-        Function<Exception, RuntimeException> function = mock(Function.class);
-        URunnable uRunnable = mock(URunnable.class);
-
-        doThrow(exceptionClass).when(uRunnable).run();
-        when(function.apply(isA(exceptionClass))).thenReturn(mappedExceptionClass.newInstance());
-
-        Runnable runnable = unchecked(uRunnable, function);
-        assertThatThrownBy(runnable::run).isExactlyInstanceOf(mappedExceptionClass);
-
-        assertThat(runnable)
-                .isNotNull()
-                .isNotEqualTo(uRunnable);
-
-        verify(uRunnable).run();
-        verify(function).apply(isA(exceptionClass));
+        assertThatThrownBy(runnable::run).isExactlyInstanceOf(RuntimeIOException.class);
     }
 
     @Test
     public void testUncheckedConsumer() throws Exception {
-        UConsumer<String> uConsumer = System.out::println;
-        Consumer<String> consumer = unchecked(uConsumer);
+        Consumer<String> consumer = unchecked(s -> {
+            throw new IOException();
+        });
 
-        assertThat(consumer)
-                .isNotNull()
-                .isNotEqualTo(uConsumer);
+        assertThatThrownBy(() -> consumer.accept("")).isExactlyInstanceOf(RuntimeException.class);
     }
 
     @Test
     public void testUncheckedConsumerWithMapper() throws Exception {
-        Class<? extends Exception> exceptionClass = IOException.class;
-        Class<? extends RuntimeException> mappedExceptionClass = RuntimeIOException.class;
+        Consumer<String> consumer = unchecked(s -> {
+            throw new IOException();
+        }, RuntimeIOException::new);
 
-        Function<Exception, RuntimeException> function = mock(Function.class);
-        UConsumer<String> uConsumer = mock(UConsumer.class);
-        doThrow(exceptionClass).when(uConsumer).accept(isA(String.class));
-        when(function.apply(isA(exceptionClass))).thenReturn(mappedExceptionClass.newInstance());
-
-        Consumer<String> consumer = unchecked(uConsumer, function);
-
-        assertThatThrownBy(() ->  consumer.accept("")).isExactlyInstanceOf(mappedExceptionClass);
-        assertThat(consumer)
-                .isNotNull()
-                .isNotEqualTo(uConsumer);
-
-        verify(uConsumer).accept(isA(String.class));
-        verify(function).apply(isA(exceptionClass));
+        assertThatThrownBy(() -> consumer.accept("")).isExactlyInstanceOf(RuntimeIOException.class);
     }
 }
