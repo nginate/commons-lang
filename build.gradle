@@ -80,10 +80,6 @@ bintray {
     }
 }
 
-release {
-    failOnCommitNeeded = false
-}
-
 build.dependsOn install
 
 task sourceJar(type: Jar, dependsOn: classes) {
