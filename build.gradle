@@ -75,7 +75,6 @@ bintray {
             desc = "${project.name} $project.version"
             released = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
             vcsTag = project.version
-            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
 }
