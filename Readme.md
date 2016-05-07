@@ -45,43 +45,6 @@ Functional stuff from java 8 to simplify boilerplate around collections
     Set<String> nonEmptyStrings = NCollections.filter(strings, s -> !"".equals(s));
 ```
 
-* Unchecked
-
-Default stream API can't handle checked exceptions in functional call, 
-because those interfaces do not throw checked exceptions. This one 
-allows you to say hello to functional programming with old-fashioned 
-checked exceptions
-
-```java
-    //vanilla style
-    public void wrap(Runnable callback) {
-        // do nasty things
-        callback.run();
-        // do nasty things again
-    }
-    
-    ...
-    wrap(() -> {
-        try {
-            // do something that throws exception
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    });
-```
-
-But with unchecked functional interfaces you can simplify the code above:
-```java
-    public void wrap(URunnable callback) {
-            // do nasty things
-            callback.run();
-            // do nasty things again
-    }
-    
-    ...
-    wrap(() -> throw new Exception(""));        
-```
-
 * Await
 
 Sometimes it's worth to just sit and wait for the body of your enemy to
@@ -95,6 +58,54 @@ float by.
     Await.waitUntil(30000, 1000, "all your base are belong to us", () -> isEnemyBodyFloatingBy());
 ```
 
+* Unchecked
+
+Default stream API can't handle checked exceptions in functional call, 
+because those interfaces do not throw checked exceptions. This one 
+allows you to say hello to functional programming with old-fashioned 
+checked exceptions.
+
+Let's assume you have method with lambda parameter:
+```java
+    //vanilla style
+    public void wrap(Runnable callback) {
+        // do nasty things
+        callback.run();
+        // do nasty things again
+    }
+
+    ...
+    wrap(() -> {
+        try {
+            // do something that throws exception
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    });
+```
+
+So you will usually call it this way:
+```java
+    wrap(() -> {
+        try {
+            // do something that throws exception
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    });
+```
+
+With unchecked functional interfaces you can avoid boilerplate in your code.
+By default all exceptions will be wrapped with RuntimeException:
+```java
+    wrap(NFunctions.unchecked(() -> throw new Exception(""));
+```
+
+Of course you want to control how to wrap your exception. This call will throw RuntimeIOException with initial cause:
+```java
+    wrap(NFunctions.unchecked(() -> throw new Exception(""), RuntimeIOException::new);
+```
+
 * Memoizers
 
 Some heavy operations may be wrapped with implicit cache functions
@@ -106,9 +117,9 @@ Some heavy operations may be wrapped with implicit cache functions
     });
     
     //After
-    Function<T, U> optimizedFunction = new FunctionMemoizer<>().doMemoize(heavyFunction);
+    Function<T, U> optimizedFunction = NFunctions.memoize(heavyFunction);
     list.stream().forEach(element -> {
-        Object result = heavyFunction.apply(element); // duplicate results are cached
+        Object result = heavyFunction.apply(element); // results are cached
         System.out.println("Result :" + result);
     });
 ```
