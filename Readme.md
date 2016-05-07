@@ -49,6 +49,7 @@ Functional stuff from java 8 to simplify boilerplate around collections
 
 Sometimes it's worth to just sit and wait for the body of your enemy to
 float by.
+
 ```java
     // wait for 30 sec
     Await.waitUntil(30000, () -> isEnemyBodyFloatingBy());
@@ -66,6 +67,7 @@ allows you to say hello to functional programming with old-fashioned
 checked exceptions.
 
 Let's assume you have method with lambda parameter:
+
 ```java
     //vanilla style
     public void wrap(Runnable callback) {
@@ -85,6 +87,7 @@ Let's assume you have method with lambda parameter:
 ```
 
 So you will usually call it this way:
+
 ```java
     wrap(() -> {
         try {
@@ -97,11 +100,14 @@ So you will usually call it this way:
 
 With unchecked functional interfaces you can avoid boilerplate in your code.
 By default all exceptions will be wrapped with RuntimeException:
+
 ```java
     wrap(NFunctions.unchecked(() -> throw new Exception(""));
 ```
 
-Of course you want to control how to wrap your exception. This call will throw RuntimeIOException with initial cause:
+Of course you want to control how to wrap your exception.
+This call will throw RuntimeIOException with initial cause:
+
 ```java
     wrap(NFunctions.unchecked(() -> throw new Exception(""), RuntimeIOException::new);
 ```
@@ -109,6 +115,7 @@ Of course you want to control how to wrap your exception. This call will throw R
 * Memoizers
 
 Some heavy operations may be wrapped with implicit cache functions
+
 ```java
     //Before
     list.stream().forEach(element -> {
