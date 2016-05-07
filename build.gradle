@@ -44,6 +44,12 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.10.8'
 }
 
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
 build.dependsOn install
 
 task sourceJar(type: Jar, dependsOn: classes) {
@@ -62,5 +68,5 @@ artifacts {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.12'
+    gradleVersion = '2.13'
 }
