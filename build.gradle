@@ -79,7 +79,7 @@ bintray {
     }
 }
 
-check.dependsOn pitest
+check.dependsOn ':pitest'
 build.dependsOn install
 
 task sourceJar(type: Jar, dependsOn: classes) {
