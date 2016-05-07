@@ -16,6 +16,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: "maven-publish"
 apply plugin: 'nebula.optional-base'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: "info.solidsoft.pitest"
@@ -61,7 +62,7 @@ test {
 bintray {
     user = findProperty('bintrayUser') ?: System.getenv('BINTRAY_USER')
     key = findProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
-    configurations = ['archives']
+    publications = ['maven']
     pkg {
         repo = 'maven'
         name = project.name
@@ -93,6 +94,16 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourceJar
     archives javadocJar
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact sourceJar
+            artifact javadocJar
+        }
+    }
 }
 
 task wrapper(type: Wrapper) {
