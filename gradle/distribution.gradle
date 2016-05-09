@@ -66,6 +66,7 @@ bintray {
         userOrg = 'nginate'
         licenses = ['WTFPL']
         vcsUrl = vcsUrl
+        publish = true
         version {
             name = project.version
             desc = "${project.name} $project.version"
@@ -73,6 +74,11 @@ bintray {
             vcsTag = project.version
             gpg {
                 sign = true
+            }
+            mavenCentralSync {
+                sync = true
+                user = findProperty('mavenCentralUser') ?: System.getenv('MAVEN_CENTRAL_USER')
+                password = findProperty('mavenCentralPass') ?: System.getenv('MAVEN_CENTRAL_PASS')
             }
         }
     }
