@@ -80,7 +80,6 @@ bintray {
 }
 
 bintrayUpload.dependsOn ':generatePomFileForMavenPublication', ':assemble'
-check.dependsOn ':pitest'
 build.dependsOn install
 
 task sourceJar(type: Jar, dependsOn: classes) {
