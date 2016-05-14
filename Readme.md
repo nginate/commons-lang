@@ -12,23 +12,7 @@ existing libraries. So this is a repo to rule them all.
 #### Distribution
 
 ##### Maven
-```maven
-    <repositories>
-       <repository>
-          <id>jcenter</id>
-          <url>http://jcenter.bintray.com</url>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-            <checksumPolicy>warn</checksumPolicy>
-          </snapshots>
-           <releases>
-             <enabled>true</enabled>
-             <checksumPolicy>warn</checksumPolicy>
-          </releases>
-       </repository>
-    </repositories>
-    
+```maven   
     <dependency>
         <groupId>com.github.nginate</groupId>
         <artifactId>commons-lang</artifactId>
