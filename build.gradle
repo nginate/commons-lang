@@ -72,8 +72,6 @@ pitest {
     outputFormats = ['HTML']
     mutateStaticInits = true
     timestampedReports = false
-    historyInputLocation = "$project.buildDir/mutations/history.bin"
-    historyOutputLocation = "$project.buildDir/mutations/history.bin"
 }
 
 jacocoTestReport {
