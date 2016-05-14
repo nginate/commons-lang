@@ -6,7 +6,8 @@ existing libraries. So this is a repo to rule them all.
 
 #### Build status
 
-[![Build Status](https://travis-ci.org/nginate/commons-lang.svg?branch=master)](https://travis-ci.org/nginate/commons-lang) [![Download](https://api.bintray.com/packages/nginate/maven/commons-lang/images/download.svg) ](https://bintray.com/nginate/maven/commons-lang/_latestVersion)
+[![Build Status](https://travis-ci.org/nginate/commons-lang.svg?branch=master)](https://travis-ci.org/nginate/commons-lang) [![Download](https://api.bintray.com/packages/nginate/maven/commons-lang/images/download.svg) ](https://bintray.com/nginate/maven/commons-lang/_latestVersion) [![codecov](https://codecov.io/gh/nginate/commons-lang/branch/master/graph/badge.svg)](https://codecov.io/gh/nginate/commons-lang)
+
 
 #### Distribution
 
