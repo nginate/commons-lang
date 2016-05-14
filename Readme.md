@@ -6,7 +6,7 @@ existing libraries. So this is a repo to rule them all.
 
 #### Build status
 
-[![][travis img]][travis] [![][mavenbadge img]][mavenbadge] [![][jcenterbadge img]][jcenterbadge] [![][codecovbadge img]][codecovbadge]
+[![][travis img]][travis] [![][mavenbadge img]][mavenbadge] [![][jcenterbadge img]][jcenterbadge] [![][codecovbadge img]][codecovbadge] [![][dependencies img]][dependencies]
 
 #### Distribution
 
@@ -170,3 +170,6 @@ Some heavy operations may be wrapped with implicit cache functions
 
 [codecovbadge]:https://codecov.io/gh/nginate/commons-lang
 [codecovbadge img]:https://codecov.io/gh/nginate/commons-lang/branch/master/graph/badge.svg
+
+[dependencies]:https://www.versioneye.com/user/projects/57371a7ba0ca35004cf781a3
+[dependencies img]:https://www.versioneye.com/user/projects/57371a7ba0ca35004cf781a3/badge.svg?style=flat
