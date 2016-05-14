@@ -6,8 +6,7 @@ existing libraries. So this is a repo to rule them all.
 
 #### Build status
 
-[![Build Status](https://travis-ci.org/nginate/commons-lang.svg?branch=master)](https://travis-ci.org/nginate/commons-lang) [![Download](https://api.bintray.com/packages/nginate/maven/commons-lang/images/download.svg) ](https://bintray.com/nginate/maven/commons-lang/_latestVersion) [![codecov](https://codecov.io/gh/nginate/commons-lang/branch/master/graph/badge.svg)](https://codecov.io/gh/nginate/commons-lang)
-
+[![][travis img]][travis] [![][mavenbadge img]][mavenbadge] [![][jcenterbadge img]][jcenterbadge] [![][codecovbadge img]][codecovbadge]
 
 #### Distribution
 
@@ -159,3 +158,15 @@ Some heavy operations may be wrapped with implicit cache functions
 <a href="http://www.wtfpl.net/"><img
        src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
        width="80" height="15" alt="WTFPL" /></a>
+       
+[mavenbadge]:http://search.maven.org/#search%7Cga%7C1%7Cnginate
+[mavenbadge img]:https://maven-badges.herokuapp.com/maven-central/com.github.nginate/commons-lang/badge.svg
+
+[travis]:https://travis-ci.org/nginate/commons-lang
+[travis img]:https://travis-ci.org/nginate/commons-lang.svg?branch=master
+
+[jcenterbadge]:https://bintray.com/nginate/maven/commons-lang/_latestVersion
+[jcenterbadge img]:https://api.bintray.com/packages/nginate/maven/commons-lang/images/download.svg
+
+[codecovbadge]:https://codecov.io/gh/nginate/commons-lang
+[codecovbadge img]:https://codecov.io/gh/nginate/commons-lang/branch/master/graph/badge.svg
